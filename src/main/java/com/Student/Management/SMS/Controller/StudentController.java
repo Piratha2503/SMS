@@ -2,19 +2,28 @@ package com.Student.Management.SMS.Controller;
 
 import com.Student.Management.SMS.APIResponse.BaseResponse;
 import com.Student.Management.SMS.APIResponse.ContentResponse;
+import com.Student.Management.SMS.APIResponse.TempRes;
 import com.Student.Management.SMS.Entity.Student;
 import com.Student.Management.SMS.RequestDTO.StudentRequest;
 import com.Student.Management.SMS.RestEnum.ResponseStatus;
 import com.Student.Management.SMS.Services.StudentServices;
 import com.Student.Management.SMS.utils.Constants;
 import com.Student.Management.SMS.utils.ValidationResponses;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Set;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -67,13 +76,12 @@ public class StudentController
 
     }
 
-
-
-
     // CRUD Operations & Validations
     @PostMapping("/insertStudent")
-    public ResponseEntity<Object> insert(@RequestBody StudentRequest studentRequest)
-    {
+    public ResponseEntity<Object> insert(@RequestParam(value = "file", required = false) MultipartFile file,
+                                         @RequestBody StudentRequest studentRequest) throws IOException {
+
+
         if (studentServices.isExistByNic(studentRequest.getNic()))
         return ResponseEntity.ok(new BaseResponse(validationResponses.getCommonFailureCode(),
                 ResponseStatus.ERROR.getStatus(),
@@ -141,7 +149,45 @@ public class StudentController
     }
 
 
-
-
-
 }
+
+
+
+/*
+@PostMapping("/insertfile")
+    public String readExcelFile(@RequestParam("file") MultipartFile file) throws IOException
+    {
+        //BufferedReader myreader = new BufferedReader(new InputStreamReader());
+            Workbook workbook = new XSSFWorkbook(file.getInputStream());
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+                 Workbook workbook = new XSSFWorkbook(String.valueOf(reader)))
+            {
+                Sheet sheet = workbook.getSheetAt(0); // Assuming you want to read from the first sheet
+                for (Row row : sheet)
+                {
+                    for (Cell cell : row)
+                    {
+                        CellType cellType = cell.getCellType();
+                        if (cellType == CellType.STRING)
+                        {
+                            cell.getStringCellValue();
+                            return "jik";
+                            // Process the string cell value as needed
+                        }
+
+                        // Handle other cell types if required
+                    }
+                }
+
+            }
+
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return "jiji";
+        }
+   }
+
+ */
