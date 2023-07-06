@@ -20,6 +20,6 @@ public class CourseResponse
     private Long id;
     private String coursename;
     private String category;
-
+    private Long catid;
 
 }

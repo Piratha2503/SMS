@@ -18,12 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -76,12 +75,13 @@ public class StudentController
 
     }
 
+
+
+
     // CRUD Operations & Validations
     @PostMapping("/insertStudent")
-    public ResponseEntity<Object> insert(@RequestParam(value = "file", required = false) MultipartFile file,
-                                         @RequestBody StudentRequest studentRequest) throws IOException {
-
-
+    public ResponseEntity<Object> insert(@RequestBody StudentRequest studentRequest)
+    {
         if (studentServices.isExistByNic(studentRequest.getNic()))
         return ResponseEntity.ok(new BaseResponse(validationResponses.getCommonFailureCode(),
                 ResponseStatus.ERROR.getStatus(),
@@ -149,45 +149,7 @@ public class StudentController
     }
 
 
+
+
+
 }
-
-
-
-/*
-@PostMapping("/insertfile")
-    public String readExcelFile(@RequestParam("file") MultipartFile file) throws IOException
-    {
-        //BufferedReader myreader = new BufferedReader(new InputStreamReader());
-            Workbook workbook = new XSSFWorkbook(file.getInputStream());
-
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
-                 Workbook workbook = new XSSFWorkbook(String.valueOf(reader)))
-            {
-                Sheet sheet = workbook.getSheetAt(0); // Assuming you want to read from the first sheet
-                for (Row row : sheet)
-                {
-                    for (Cell cell : row)
-                    {
-                        CellType cellType = cell.getCellType();
-                        if (cellType == CellType.STRING)
-                        {
-                            cell.getStringCellValue();
-                            return "jik";
-                            // Process the string cell value as needed
-                        }
-
-                        // Handle other cell types if required
-                    }
-                }
-
-            }
-
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return "jiji";
-        }
-   }
-
- */
