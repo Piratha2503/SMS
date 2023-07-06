@@ -4,12 +4,9 @@ import com.Student.Management.SMS.Entity.StudentUser;
 import com.Student.Management.SMS.Repository.StudentUserRepository;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 import com.Student.Management.SMS.Services.StudentUserServices;
-import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class StudentUserServiceImplement implements StudentUserServices

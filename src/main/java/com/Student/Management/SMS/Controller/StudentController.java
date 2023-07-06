@@ -2,27 +2,15 @@ package com.Student.Management.SMS.Controller;
 
 import com.Student.Management.SMS.APIResponse.BaseResponse;
 import com.Student.Management.SMS.APIResponse.ContentResponse;
-import com.Student.Management.SMS.APIResponse.TempRes;
-import com.Student.Management.SMS.Entity.Student;
 import com.Student.Management.SMS.RequestDTO.StudentRequest;
 import com.Student.Management.SMS.RestEnum.ResponseStatus;
 import com.Student.Management.SMS.Services.StudentServices;
 import com.Student.Management.SMS.utils.Constants;
 import com.Student.Management.SMS.utils.ValidationResponses;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 @RestController
 @CrossOrigin
