@@ -4,11 +4,11 @@ import com.Student.Management.SMS.RequestDTO.EmailRequest;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 
 public interface StudentUserServices {
-    public void userSignUp(StudentUserRequest studentUserRequest);
-    public void sendMail(EmailRequest emailRequest);
+    void userSignUp(StudentUserRequest studentUserRequest);
+    void sendMail(EmailRequest emailRequest);
 
-    public boolean existEmail(String email);
-    public boolean existUserName(String userName);
+    boolean existEmail(String email);
+    boolean existUserName(String userName);
 
     void userAuthorize(StudentUserRequest studentUserRequest);
 

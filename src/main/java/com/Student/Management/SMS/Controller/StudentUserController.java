@@ -1,10 +1,7 @@
 package com.Student.Management.SMS.Controller;
 
-import com.Student.Management.SMS.Entity.StudentUser;
-import com.Student.Management.SMS.RequestDTO.EmailRequest;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 import com.Student.Management.SMS.Services.StudentUserServices;
-
 import com.Student.Management.SMS.utils.Emailconfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

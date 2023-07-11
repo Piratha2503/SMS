@@ -1,7 +1,6 @@
 package com.Student.Management.SMS.PasswordReset;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import lombok.Getter;
 import lombok.Setter;
