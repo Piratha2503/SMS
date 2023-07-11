@@ -2,6 +2,8 @@ package com.Student.Management.SMS.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,15 +13,15 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class StudentUser
+public class UserLogs
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
-    private String password;
-    private String email;
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private boolean isActivate = false;
+    private String otp;
+    private LocalDateTime updatedAt = LocalDateTime.now();
+    private String userStatus;
+
 
 }
