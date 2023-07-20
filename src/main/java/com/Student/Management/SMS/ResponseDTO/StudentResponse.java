@@ -11,8 +11,7 @@ import javax.persistence.Id;
 @Setter
 public class StudentResponse
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String stuid;
     private String firstname;

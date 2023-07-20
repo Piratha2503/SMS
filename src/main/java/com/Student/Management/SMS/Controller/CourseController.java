@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class CourseController
 {
-
     @Autowired
     private CourseServices courseServices;
 

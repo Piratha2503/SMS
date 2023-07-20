@@ -9,34 +9,28 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 
-public class SendEmail
-{
-  @Autowired
-  private Emailconfig emailconfig;
+public class SendEmail {
+    @Autowired
+    private Emailconfig emailconfig;
 
-  private JavaMailSender mailSender;
+    private JavaMailSender mailSender;
 
+    public SendEmail(SimpleMailMessage mailMessage) {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setPort(587);
+        javaMailSender.setUsername("pirathaban1992@gmail.com");
+        javaMailSender.setPassword("llcimuemxqfzhgwk");
 
+        Properties properties = javaMailSender.getJavaMailProperties();
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.transport.protocol", "smtp");
 
-
-  public SendEmail(SimpleMailMessage mailMessage)
-  {
-      JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-      javaMailSender.setHost("smtp.gmail.com");
-      javaMailSender.setPort(587);
-      javaMailSender.setUsername("pirathaban1992@gmail.com");
-      javaMailSender.setPassword("sulalhuaqkfffgmg");
-
-      Properties properties = javaMailSender.getJavaMailProperties();
-      properties.put("mail.smtp.starttls.enable", "true");
-      properties.put("mail.smtp.auth", "true");
-      properties.put("mail.transport.protocol", "smtp");
-
-      this.mailSender = javaMailSender;
-
-      mailSender.send(mailMessage);
+        this.mailSender = javaMailSender;
+        mailSender.send(mailMessage);
 
 
-  }
+    }
 
 }

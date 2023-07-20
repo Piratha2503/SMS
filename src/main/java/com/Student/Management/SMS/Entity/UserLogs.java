@@ -2,12 +2,11 @@ package com.Student.Management.SMS.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.joda.time.DateTime;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,7 +20,7 @@ public class UserLogs
     private String userName;
     private String otp;
     private LocalDateTime updatedAt = LocalDateTime.now();
-    private String userStatus;
+    private String otpStatus;
 
 
 }

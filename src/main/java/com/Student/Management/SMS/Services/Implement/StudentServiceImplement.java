@@ -4,17 +4,17 @@ package com.Student.Management.SMS.Services.Implement;
 import com.Student.Management.SMS.Entity.Student;
 import com.Student.Management.SMS.Repository.StudentRepository;
 import com.Student.Management.SMS.RequestDTO.StudentRequest;
+import com.Student.Management.SMS.ResponseDTO.StudentResponse;
 import com.Student.Management.SMS.Services.StudentServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImplement implements StudentServices
@@ -70,11 +70,11 @@ public class StudentServiceImplement implements StudentServices
         studentRepository.save(students);
     }
 
+    @Transactional
     @Override
     public String deleteStudent(String nic)
     {
-        List<Student> student = studentRepository.findAllByNic(nic);
-        studentRepository.deleteAll(student);
+        studentRepository.deleteByNic(nic);
         return "ok";
     }
 
@@ -84,5 +84,19 @@ public class StudentServiceImplement implements StudentServices
         List<Student> studentList = new ArrayList<>();
         studentRepository.findAll().forEach(student -> studentList.add(student));
         return studentList;
+    }
+
+    @Override
+    public List<StudentResponse> getStudentsByCity(String city)
+    {
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+        List<Student> studentList = studentRepository.findAllByCityIgnoreCaseNot(city);
+        for (Student student : studentList)
+        {
+            StudentResponse studentResponse = new StudentResponse();
+            BeanUtils.copyProperties(student,studentResponse);
+            studentResponseList.add(studentResponse);
+        }
+            return studentResponseList;
     }
 }

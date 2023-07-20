@@ -10,10 +10,15 @@ import com.Student.Management.SMS.Repository.UserLogsRepository;
 import com.Student.Management.SMS.RequestDTO.EmailRequest;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 import com.Student.Management.SMS.Services.StudentUserServices;
+import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Service
 public class StudentUserServiceImplement implements StudentUserServices {
@@ -36,12 +41,11 @@ public class StudentUserServiceImplement implements StudentUserServices {
         emailRequest.setUserName(studentUserRequest.getUserName());
         emailRequest.setTo(studentUserRequest.getEmail());
         emailRequest.setSubject("Register Email");
-        sendMail(emailRequest);
+        generateMail(emailRequest);
 
     }
-
     @Override
-    public void sendMail(EmailRequest emailRequest)
+    public void generateMail(EmailRequest emailRequest)
     {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         UserLogs userLogs = new UserLogs();
@@ -52,7 +56,7 @@ public class StudentUserServiceImplement implements StudentUserServices {
         new SendEmail(mailMessage);
         userLogs.setUserName(emailRequest.getUserName());
         userLogs.setOtp(otpGenerate.getOtp());
-        userLogs.setUserStatus("New");
+        userLogs.setOtpStatus("New");
         userLogsRepository.save(userLogs);
 
     }
@@ -77,7 +81,7 @@ public class StudentUserServiceImplement implements StudentUserServices {
         studentUserRepository.save(authStudentUser);
 
         UserLogs authuserLogs = userLogsRepository.findByUserNameIgnoreCaseAndOtpIgnoreCase(studentUserRequest.getUserName(),studentUserRequest.getOtp());
-        authuserLogs.setUserStatus("Verified");
+        authuserLogs.setOtpStatus("Verified");
         userLogsRepository.save(authuserLogs);
 
     }
@@ -85,7 +89,8 @@ public class StudentUserServiceImplement implements StudentUserServices {
     @Override
     public boolean existOTP(String otp)
     {
-        return userLogsRepository.existsByOtp(otp);
+        LocalDateTime dateTime = userLogsRepository.findMaxUpdatedAtByOtp(otp);
+        return userLogsRepository.existsByOtpAndUpdatedAt(otp,dateTime);
     }
 
 }

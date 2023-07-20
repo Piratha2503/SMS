@@ -5,7 +5,7 @@ import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 
 public interface StudentUserServices {
     void userSignUp(StudentUserRequest studentUserRequest);
-    void sendMail(EmailRequest emailRequest);
+    void generateMail(EmailRequest emailRequest);
 
     boolean existEmail(String email);
     boolean existUserName(String userName);

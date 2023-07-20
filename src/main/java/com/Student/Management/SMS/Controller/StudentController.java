@@ -63,9 +63,6 @@ public class StudentController
 
     }
 
-
-
-
     // CRUD Operations & Validations
     @PostMapping("/insertStudent")
     public ResponseEntity<Object> insert(@RequestBody StudentRequest studentRequest)
@@ -87,7 +84,7 @@ public class StudentController
     public ResponseEntity<Object> update(@RequestBody StudentRequest studentRequest)
     {
         if (studentServices.isExistByNic(studentRequest.getNic()))
-        return ResponseEntity.ok(new BaseResponse(validationResponses.getCommonFailureCode(),
+            return ResponseEntity.ok(new BaseResponse(validationResponses.getCommonFailureCode(),
             ResponseStatus.ERROR.getStatus(),
             validationResponses.getNicAlreadyExist()
     ));
@@ -103,8 +100,8 @@ public class StudentController
     ));
     }
 
-    @DeleteMapping("/deleteStudent/{nic}")
-    public ResponseEntity<Object> deleteStudent(@PathVariable String nic)
+    @DeleteMapping("/deleteStudent")
+    public ResponseEntity<Object> deleteStudent(@RequestParam(name = "nicc") String nic)
     {
         if (studentServices.isExistByNic(nic))
         {
@@ -127,7 +124,6 @@ public class StudentController
     @GetMapping("/getAllStudents")
     public ResponseEntity<Object> getALlPage(Pageable pageable)
     {
-
         return ResponseEntity.ok(new ContentResponse<>(
                 Constants.STUDENTS,
                 studentServices.getALlPage(pageable),
@@ -136,6 +132,12 @@ public class StudentController
                 validationResponses.getViewAllMsg()));
     }
 
+    @GetMapping("/getStudentsAddress")
+    public ResponseEntity<Object> getStudents(@RequestParam(name = "city") String city)
+    {
+
+       return ResponseEntity.ok(studentServices.getStudentsByCity(city));
+    }
 
 
 
