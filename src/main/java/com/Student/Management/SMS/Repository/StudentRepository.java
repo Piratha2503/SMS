@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student,Long>
 {
-    public boolean existsByNic(String nic);
-    public List<Student> findAllByNic(String nic);
-    public boolean existsByStuid(String stuid);
-    public List<Student> findAllByStuid(String stuid);
+    boolean existsByNic(String nic);
+    List<Student> findAllByNic(String nic);
+    boolean existsByStuid(String stuid);
+    List<Student> findAllByStuid(String stuid);
     List<Student> findAllByCityIgnoreCaseNot(String city);
 
     void deleteAllByNic(String nic);

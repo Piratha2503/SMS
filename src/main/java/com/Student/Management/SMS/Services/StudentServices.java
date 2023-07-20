@@ -3,13 +3,10 @@ package com.Student.Management.SMS.Services;
 import com.Student.Management.SMS.Entity.Student;
 import com.Student.Management.SMS.RequestDTO.StudentRequest;
 import com.Student.Management.SMS.ResponseDTO.StudentResponse;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 
 public interface StudentServices

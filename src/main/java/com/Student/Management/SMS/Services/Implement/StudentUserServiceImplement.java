@@ -10,14 +10,11 @@ import com.Student.Management.SMS.Repository.UserLogsRepository;
 import com.Student.Management.SMS.RequestDTO.EmailRequest;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
 import com.Student.Management.SMS.Services.StudentUserServices;
-import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Service

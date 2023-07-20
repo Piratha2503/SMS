@@ -1,13 +1,10 @@
 package com.Student.Management.SMS.Repository;
 
 import com.Student.Management.SMS.Entity.UserLogs;
-import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public interface UserLogsRepository extends JpaRepository<UserLogs,Long>
