@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 
 public interface UserLogsRepository extends JpaRepository<UserLogs,Long>
 {
-    UserLogs findByUserNameIgnoreCaseAndOtpIgnoreCase(String userName, String otp);
-
     @Query("SELECT MAX(u.updatedAt) FROM UserLogs u WHERE u.otp = :otp")
     LocalDateTime findMaxUpdatedAtByOtp(@Param("otp") String otp);
 
-    boolean existsByOtpAndUpdatedAt(String otp, LocalDateTime dateTime);
+    boolean existsByToken(String token);
 }

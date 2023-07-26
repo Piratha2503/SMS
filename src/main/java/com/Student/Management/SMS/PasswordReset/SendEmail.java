@@ -26,7 +26,6 @@ public class SendEmail {
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.transport.protocol", "smtp");
-
         this.mailSender = javaMailSender;
         mailSender.send(mailMessage);
 

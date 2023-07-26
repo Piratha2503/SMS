@@ -27,13 +27,21 @@ public class ValidationResponses
     private String deleteMsg;
     @Value("${message.viewall.student}")
     private String viewAllMsg;
-
     @Value("${message.nic.notfound}")
     private String NicNotFoundMsg;
     @Value("${message.StuID.notfound}")
     private String STUIDNotFoundMsg;
     @Value("${message.nic.alreadyExist}")
     private String NicAlreadyExist;
+
+    @Value("${message.login.success}")
+    private String LoginSuccessMessage;
+    @Value("${message.login.failure}")
+    private String LoginFailureMessage;
+    @Value("${message.email.notFound}")
+    private String EmailNotFoundMessage;
+    @Value("${message.user.verified}")
+    private String userVerifiedMessage;
 
     /*
     *

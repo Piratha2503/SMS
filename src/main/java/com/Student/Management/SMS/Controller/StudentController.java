@@ -100,12 +100,12 @@ public class StudentController
     ));
     }
 
-    @DeleteMapping("/deleteStudent")
-    public ResponseEntity<Object> deleteStudent(@RequestParam(name = "nicc") String nic)
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<Object> deleteStudent(@PathVariable Long id)
     {
-        if (studentServices.isExistByNic(nic))
+        if (studentServices.existById(id))
         {
-            studentServices.deleteStudent(nic);
+            studentServices.deleteStudent(id);
             return ResponseEntity.ok(new BaseResponse
                     (
                     validationResponses.getCommonSuccessCode(),
@@ -138,8 +138,18 @@ public class StudentController
 
        return ResponseEntity.ok(studentServices.getStudentsByCity(city));
     }
+    @GetMapping("/getStudents")
+    public ResponseEntity<Object> getStudents()
+    {
 
+        return ResponseEntity.ok(studentServices.getStudents());
+    }
 
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Object> getById(@PathVariable Long id)
+    {
+       return ResponseEntity.ok(studentServices.getStudentById(id));
 
+    }
 
 }

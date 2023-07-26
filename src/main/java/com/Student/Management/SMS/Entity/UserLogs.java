@@ -21,6 +21,7 @@ public class UserLogs
     private String otp;
     private LocalDateTime updatedAt = LocalDateTime.now();
     private String otpStatus;
+    private String token;
 
 
 }

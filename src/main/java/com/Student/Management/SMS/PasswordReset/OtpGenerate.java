@@ -12,7 +12,7 @@ public class OtpGenerate
 {
     private int otp;
     Random random = new Random();
-    int myotp = random.nextInt(9999999);
+    int myotp = random.nextInt(999999);
 
     public String getOtp()
     {

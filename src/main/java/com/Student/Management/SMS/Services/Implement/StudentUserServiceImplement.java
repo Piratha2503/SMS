@@ -1,24 +1,57 @@
 package com.Student.Management.SMS.Services.Implement;
 
-import com.Student.Management.SMS.Entity.StudentUser;
 import com.Student.Management.SMS.Entity.UserLogs;
-import com.Student.Management.SMS.PasswordReset.OtpGenerate;
+import com.Student.Management.SMS.PasswordReset.GenerateToken;
 import com.Student.Management.SMS.PasswordReset.SendEmail;
-import com.Student.Management.SMS.PasswordReset.generateToken;
 import com.Student.Management.SMS.Repository.StudentUserRepository;
 import com.Student.Management.SMS.Repository.UserLogsRepository;
-import com.Student.Management.SMS.RequestDTO.EmailRequest;
 import com.Student.Management.SMS.RequestDTO.StudentUserRequest;
-import com.Student.Management.SMS.Services.StudentUserServices;
-import org.springframework.beans.BeanUtils;
+import com.Student.Management.SMS.Services.StudentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
-public class StudentUserServiceImplement implements StudentUserServices {
+public class StudentUserServiceImplement implements StudentUserService
+{
+    @Autowired
+    private StudentUserRepository studentUserRepository;
+    @Autowired
+    private UserLogsRepository userLogsRepository;
+    @Autowired
+    private GenerateToken generateToken;
+
+
+    @Override
+    public boolean studentLogin(StudentUserRequest studentUserRequest) {
+
+        return studentUserRepository.existsByUserNameIgnoreCaseAndPassword(studentUserRequest.getUserName(), studentUserRequest.getPassword());
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return studentUserRepository.existsByEmailIgnoreCase(email);
+    }
+
+    @Override
+    public String passwordReset(String email)
+    {
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(email);
+        mailMessage.setSubject("This is your password reset link");
+        String tokenid = generateToken.tokenGenerate();
+        mailMessage.setText("http://localhost:8090/mypath/sendLink/"+tokenid);
+        new SendEmail(mailMessage);
+
+        UserLogs userLogs = new UserLogs();
+        userLogs.setToken(tokenid);
+        userLogsRepository.save(userLogs);
+        return "Your Email Address Verified a link forwarded to your email";
+    }
+}
+
+    /*
     @Autowired
     private StudentUserRepository studentUserRepository;
 
@@ -91,3 +124,4 @@ public class StudentUserServiceImplement implements StudentUserServices {
     }
 
 }
+*/

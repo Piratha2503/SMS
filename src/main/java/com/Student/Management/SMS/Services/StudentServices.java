@@ -14,6 +14,7 @@ public interface StudentServices
     // Check Functions
     public boolean isExistByNic(String nic);
     public boolean isExistByStuid(String stuid);
+    boolean existById(Long id);
 
     // Search Operations
     public List<Student> findByNic(String nic);
@@ -25,8 +26,12 @@ public interface StudentServices
     // CRUD Operations
     public void insertSudents(StudentRequest studentRequest);
     public void updateStudent(StudentRequest studentRequest);
-    public String deleteStudent(String nic);
+    public String deleteStudent(Long id);
     public List<Student> getAllStudents();
 
     List<StudentResponse> getStudentsByCity(String city);
+
+    List<StudentResponse> getStudents();
+
+    StudentResponse getStudentById(Long id);
 }

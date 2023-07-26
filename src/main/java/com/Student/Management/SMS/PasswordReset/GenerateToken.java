@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Component
-public class generateToken
+public class GenerateToken
 {
 
     public String tokenGenerate()
